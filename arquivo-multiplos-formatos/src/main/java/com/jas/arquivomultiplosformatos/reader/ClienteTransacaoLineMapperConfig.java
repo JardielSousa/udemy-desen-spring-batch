@@ -16,10 +16,9 @@ import java.util.Map;
 @Configuration
 public class ClienteTransacaoLineMapperConfig {
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
     @Bean
-    public PatternMatchingCompositeLineMapper lineMapper() {
-        PatternMatchingCompositeLineMapper lineMapper = new PatternMatchingCompositeLineMapper();
+    public PatternMatchingCompositeLineMapper<Object> lineMapper() {
+        PatternMatchingCompositeLineMapper<Object> lineMapper = new PatternMatchingCompositeLineMapper<>();
         lineMapper.setTokenizers(tokenizers());
         lineMapper.setFieldSetMappers(fielSetMappers());
 
@@ -34,18 +33,16 @@ public class ClienteTransacaoLineMapperConfig {
         return tokenizers;
     }
 
-    @SuppressWarnings("rawtypes")
-    private Map<String, FieldSetMapper> fielSetMappers() {
-        Map<String, FieldSetMapper> fieldSetMappers = new HashMap<>();
+    private Map<String, FieldSetMapper<Object>> fielSetMappers() {
+        Map<String, FieldSetMapper<Object>> fieldSetMappers = new HashMap<>();
         fieldSetMappers.put("0*", fieldSetMapper(Cliente.class));
         fieldSetMappers.put("1*", fieldSetMapper(Transacao.class));
 
         return fieldSetMappers;
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    private FieldSetMapper fieldSetMapper(Class classe) {
-        BeanWrapperFieldSetMapper fieldSetMapper = new BeanWrapperFieldSetMapper();
+    private FieldSetMapper<Object> fieldSetMapper(Class<?> classe) {
+        BeanWrapperFieldSetMapper<Object> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(classe);
 
         return fieldSetMapper;
