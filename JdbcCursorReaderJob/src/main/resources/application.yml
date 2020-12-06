@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    jdbcUrl: jdbc:postgresql://127.0.0.1:5432/${DATASOURCE_DB}
+    username: ${DATASOURCE_USER}
+    password: ${DATASOURCE_PASS}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+  flyway:
+    enabled: false
+  batch:
+    initialize-schema: "always"
+app:
+  datasource:
+    jdbcUrl: jdbc:postgresql://127.0.0.1:5432/${DATASOURCE_DB_APP}
+    username: ${DATASOURCE_USER}
+    password: ${DATASOURCE_PASS}
